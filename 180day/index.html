@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="مهمة 180 يوم, تقييم الموظفين, تطوير الموظفين, أداء الموظفين, تقييم أداء, موارد بشرية, الدوام الفعلي خلال السنة , تطوير مهني, خطة تطوير الموظفين">
-    <meta name="description" content="نظام متكامل لحساب الدوام الفعلي خلال السنة للحصول على الامتياز. يتميز بسهولة الاستخدام والفعاليّة في متابعة أداء الموظفين وتحقيق التميز خلال 180 يوم عمل.">
-    <title>مهمة 180: رحلتك نحو التميز المهني</title>
+    <meta name="keywords" id="metaKeywords" content="مهمة 180 يوم, تقييم الموظفين, تطوير الموظفين, أداء الموظفين, تقييم أداء, موارد بشرية, الدوام الفعلي خلال السنة , تطوير مهني, خطة تطوير الموظفين">
+    <meta name="description" id="metaDescription" content="نظام متكامل لحساب الدوام الفعلي خلال السنة للحصول على الامتياز. يتميز بسهولة الاستخدام والفعاليّة في متابعة أداء الموظفين وتحقيق التميز خلال 180 يوم عمل.">
+    <title id="pageTitle">مهمة 180: رحلتك نحو التميز المهني</title>
     <style>
         :root {
             --primary-color: #4a6fa5;
@@ -119,12 +119,38 @@
         .toggle-container {
             display: flex;
             align-items: center;
+            gap: 2vw;
         }
 
         .toggle-text {
-            margin-left: 10px;
             font-weight: 500;
-            padding: 0 9px;
+        }
+
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .lang-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .lang-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
         }
 
         .switch {
@@ -474,8 +500,19 @@
             opacity: 0.7;
             font-size: 0.9rem;
         }
+        footer a{
+            text-decoration: none;
+            color: var(--card-dark);
+            font-size: 35px;
+            text-align: center;
+            margin: 25px 15px;
+            
+        }
 
         .dark-mode footer {
+            color: white;
+        }
+        .dark-mode footer a {
             color: white;
         }
 
@@ -495,7 +532,7 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 765px) {
             .calendar {
                 grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             }
@@ -510,12 +547,25 @@
             
             .controls {
                 flex-direction: column;
-                gap: 15px;
             }
+
+            .language-switcher{
+        
+            margin: 0 3vw;
+           }
+        
+            .toggle-container {
+                width: 110%;
+                justify-content: center;
+               
+            }
+
             
             .buttons-container {
                 width: 100%;
                 justify-content: center;
+                margin-top: 20px;
+              
             }
             
             .day-controls {
@@ -533,17 +583,21 @@
 <body>
     <div class="container">
         <header>
-            <h1>مهمة 180 يوم </h1>
-            <p>تابع تقدمك في رحلتك المهنية</p>
+            <h1 id="headerTitle">مهمة 180 يوم</h1>
+            <p id="headerSubtitle">تابع تقدمك في رحلتك المهنية</p>
         </header>
 
         <div class="controls">
             <div class="toggle-container">
-                <label class="switch">
+                <div class="language-switcher">
+                    <button class="lang-btn active" id="arBtn">العربية</button>
+                    <button class="lang-btn" id="enBtn">English</button>
+                </div>
+                <label class="switch" >
                     <input type="checkbox" id="darkModeToggle">
                     <span class="slider"></span>
                 </label>
-                <span class="toggle-text">الوضع الداكن</span>
+                <span class="toggle-text" id="darkModeText">الوضع الداكن</span>
             </div>
             <div class="buttons-container">
                 <button class="btn reset-btn" id="resetBtn">إعادة التعيين</button>
@@ -551,36 +605,36 @@
         </div>
 
         <div class="last-update">
-            <h3>آخر تحديث:</h3>
-            <p>تم التعديل آخر مرة في: <span class="update-time" id="lastUpdateTime">لم يتم التعديل بعد</span></p>
+            <h3 id="lastUpdateTitle">آخر تحديث:</h3>
+            <p id="lastUpdateText">تم التعديل آخر مرة في: <span class="update-time" id="lastUpdateTime">لم يتم التعديل بعد</span></p>
         </div>
 
         <div class="progress-container">
-            <h2>تقدمك</h2>
+            <h2 id="progressTitle">تقدمك</h2>
             <div class="progress-bar">
                 <div class="progress" id="progressBar"></div>
             </div>
             <div class="stats">
                 <div class="stat">
                     <div class="stat-value" id="completedDays">0</div>
-                    <div class="stat-label">أيام مكتملة</div>
+                    <div class="stat-label" id="completedDaysLabel">أيام مكتملة</div>
                 </div>
                 <div class="stat">
                     <div class="stat-value" id="remainingDays">180</div>
-                    <div class="stat-label">أيام متبقية</div>
+                    <div class="stat-label" id="remainingDaysLabel">أيام متبقية</div>
                 </div>
                 <div class="stat">
                     <div class="stat-value" id="completionPercent">0%</div>
-                    <div class="stat-label">النسبة المئوية</div>
+                    <div class="stat-label" id="completionPercentLabel">النسبة المئوية</div>
                 </div>
             </div>
             
             <div class="day-controls">
                 <button class="day-control-btn complete-day-btn" id="completeDayBtn">
-                    <span>✓</span> إكمال اليوم الحالي
+                    <span>✓</span> <span id="completeDayText">إكمال اليوم الحالي</span>
                 </button>
                 <button class="day-control-btn undo-day-btn" id="undoDayBtn">
-                    <span>↶</span> تراجع عن اليوم
+                    <span>↶</span> <span id="undoDayText">تراجع عن اليوم</span>
                 </button>
             </div>
         </div>
@@ -590,19 +644,22 @@
         </div>
 
         <footer>
-            <p>تابع تقدمك يومًا بيوم نحو تحقيق أهدافك المهنية</p>
+            <p id="footerText">تابع تقدمك يومًا بيوم نحو تحقيق أهدافك المهنية</p>
+            <a title="My Github" href="https://github.com/A24kii"><ion-icon name="logo-github"></ion-icon></a>
+            <a title="My Tiktok" href="https://www.tiktok.com/@a276iii"><ion-icon name="logo-tiktok"></ion-icon></a>
+            <a title="My X" href="https://x.com/a276ii">X</a>
         </footer>
     </div>
 
     <!-- نافذة التهنئة عند إكمال 180 يوم -->
     <div class="modal" id="congratsModal">
         <div class="modal-content">
-            <h2>مبروك! لقد أكملت 180 يوم عمل</h2>
-            <p>لقد أنهيت بنجاح رحلتك الممتدة على 180 يوم عمل. هذا إنجاز رائع يستحق التقدير!</p>
-            <div class="dua">
+            <h2 id="congratsTitle">مبروك! لقد أكملت 180 يوم عمل</h2>
+            <p id="congratsText">لقد أنهيت بنجاح رحلتك الممتدة على 180 يوم عمل. هذا إنجاز رائع يستحق التقدير!</p>
+            <div class="dua" id="congratsDua">
                 "اللهم بارك لي في عملي، واجعل عملي هذا خالصًا لوجهك الكريم، وارزقني التوفيق والنجاح في كل ما أقدم عليه"
             </div>
-            <p>استمر في التقدم والعطاء، فالعمل الجاد هو طريق النجاح.</p>
+            <p id="congratsMessage">استمر في التقدم والعطاء، فالعمل الجاد هو طريق النجاح.</p>
             <button class="close-modal" id="closeModal">متابعة</button>
         </div>
     </div>
@@ -610,12 +667,12 @@
     <!-- نافذة التهنئة عند 25% -->
     <div class="modal" id="quarterModal">
         <div class="modal-content">
-            <h2>أحسنت! لقد أكملت ربع الطريق</h2>
-            <p>لقد أكملت 25% من رحلتك، هذا مؤشر رائع على استمراريتك وتفانيك.</p>
-            <div class="dua">
+            <h2 id="quarterTitle">أحسنت! لقد أكملت ربع الطريق</h2>
+            <p id="quarterText">لقد أكملت 25% من رحلتك، هذا مؤشر رائع على استمراريتك وتفانيك.</p>
+            <div class="dua" id="quarterDua">
                 "اللهم أعني على ذكرك وشكرك وحسن عبادتك، وارزقني الإخلاص في القول والعمل"
             </div>
-            <p>استمر على هذا النحو، فالنجاح يحتاج إلى صبر ومثابرة.</p>
+            <p id="quarterMessage">استمر على هذا النحو، فالنجاح يحتاج إلى صبر ومثابرة.</p>
             <button class="close-modal" id="closeQuarterModal">متابعة</button>
         </div>
     </div>
@@ -623,12 +680,12 @@
     <!-- نافذة التهنئة عند 50% -->
     <div class="modal" id="halfModal">
         <div class="modal-content">
-            <h2>تهانينا! لقد وصلت إلى منتصف الطريق</h2>
-            <p>ها قد وصلت إلى منتصف رحلتك، لقد قطعت شوطاً كبيراً واستحققت أن تفخر بنفسك.</p>
-            <div class="dua">
+            <h2 id="halfTitle">تهانينا! لقد وصلت إلى منتصف الطريق</h2>
+            <p id="halfText">ها قد وصلت إلى منتصف رحلتك، لقد قطعت شوطاً كبيراً واستحققت أن تفخر بنفسك.</p>
+            <div class="dua" id="halfDua">
                 "اللهم لا سهل إلا ما جعلته سهلاً، وأنت تجعل الحزن إذا شئت سهلاً"
             </div>
-            <p>تذكر أن النصف الثاني سيكون أسهل، فأنت الآن أكثر خبرة وتجربة.</p>
+            <p id="halfMessage">تذكر أن النصف الثاني سيكون أسهل، فأنت الآن أكثر خبرة وتجربة.</p>
             <button class="close-modal" id="closeHalfModal">متابعة</button>
         </div>
     </div>
@@ -636,12 +693,12 @@
     <!-- نافذة التهنئة عند 75% -->
     <div class="modal" id="threeQuartersModal">
         <div class="modal-content">
-            <h2>مذهل! لقد أكملت 75% من رحلتك</h2>
-            <p>لم يتبق سوى القليل لتحقيق هدفك، لقد أظهرت عزيمة وإصراراً يستحقان الإعجاب.</p>
-            <div class="dua">
+            <h2 id="threeQuartersTitle">مذهل! لقد أكملت 75% من رحلتك</h2>
+            <p id="threeQuartersText">لم يتبق سوى القليل لتحقيق هدفك، لقد أظهرت عزيمة وإصراراً يستحقان الإعجاب.</p>
+            <div class="dua" id="threeQuartersDua">
                 "اللهم انفعني بما علمتني، وعلمني ما ينفعني، وزدني علماً وتوفيقاً وإخلاصاً في العمل"
             </div>
-            <p>أنت على بعد خطوات قليلة من تحقيق هدفك، استمر ولا تتراجع.</p>
+            <p id="threeQuartersMessage">أنت على بعد خطوات قليلة من تحقيق هدفك، استمر ولا تتراجع.</p>
             <button class="close-modal" id="closeThreeQuartersModal">متابعة</button>
         </div>
     </div>
@@ -658,6 +715,10 @@
             const remainingDaysEl = document.getElementById('remainingDays');
             const completionPercentEl = document.getElementById('completionPercent');
             const lastUpdateTimeEl = document.getElementById('lastUpdateTime');
+            
+            // أزرار تغيير اللغة
+            const arBtn = document.getElementById('arBtn');
+            const enBtn = document.getElementById('enBtn');
             
             // النوافذ المنبثقة
             const congratsModal = document.getElementById('congratsModal');
@@ -676,6 +737,87 @@
             let currentDay = 1;
             let daysData = [];
             let lastProgressMilestone = 0; // لتتبع آخر مرحلة تم الوصول إليها
+            let currentLanguage = 'ar'; // اللغة الافتراضية
+            
+            // نصوص الترجمة
+            const translations = {
+                ar: {
+                    headerTitle: "مهمة 180 يوم",
+                    headerSubtitle: "تابع تقدمك في رحلتك المهنية",
+                    darkModeText: "الوضع الداكن",
+                    lastUpdateTitle: "آخر تحديث:",
+                    lastUpdateText: "تم التعديل آخر مرة في:",
+                    progressTitle: "تقدمك",
+                    completedDaysLabel: "أيام مكتملة",
+                    remainingDaysLabel: "أيام متبقية",
+                    completionPercentLabel: "النسبة المئوية",
+                    completeDayText: "إكمال اليوم الحالي",
+                    undoDayText: "تراجع عن اليوم",
+                    resetBtn: "إعادة التعيين",
+                    footerText: "تابع تقدمك يومًا بيوم نحو تحقيق أهدافك المهنية",
+                    congratsTitle: "مبروك! لقد أكملت 180 يوم عمل",
+                    congratsText: "لقد أنهيت بنجاح رحلتك الممتدة على 180 يوم عمل. هذا إنجاز رائع يستحق التقدير!",
+                    congratsDua: "اللهم بارك لي في عملي، واجعل عملي هذا خالصًا لوجهك الكريم، وارزقني التوفيق والنجاح في كل ما أقدم عليه",
+                    congratsMessage: "استمر في التقدم والعطاء، فالعمل الجاد هو طريق النجاح.",
+                    closeModal: "متابعة",
+                    quarterTitle: "أحسنت! لقد أكملت ربع الطريق",
+                    quarterText: "لقد أكملت 25% من رحلتك، هذا مؤشر رائع على استمراريتك وتفانيك.",
+                    quarterDua: "اللهم أعني على ذكرك وشكرك وحسن عبادتك، وارزقني الإخلاص في القول والعمل",
+                    quarterMessage: "استمر على هذا النحو، فالنجاح يحتاج إلى صبر ومثابرة.",
+                    halfTitle: "تهانينا! لقد وصلت إلى منتصف الطريق",
+                    halfText: "ها قد وصلت إلى منتصف رحلتك، لقد قطعت شوطاً كبيراً واستحققت أن تفخر بنفسك.",
+                    halfDua: "اللهم لا سهل إلا ما جعلته سهلاً، وأنت تجعل الحزن إذا شئت سهلاً",
+                    halfMessage: "تذكر أن النصف الثاني سيكون أسهل، فأنت الآن أكثر خبرة وتجربة.",
+                    threeQuartersTitle: "مذهل! لقد أكملت 75% من رحلتك",
+                    threeQuartersText: "لم يتبق سوى القليل لتحقيق هدفك، لقد أظهرت عزيمة وإصراراً يستحقان الإعجاب.",
+                    threeQuartersDua: "اللهم انفعني بما علمتني، وعلمني ما ينفعني، وزدني علماً وتوفيقاً وإخلاصاً في العمل",
+                    threeQuartersMessage: "أنت على بعد خطوات قليلة من تحقيق هدفك، استمر ولا تتراجع.",
+                    dayText: "يوم",
+                    resetConfirm: "هل أنت متأكد من أنك تريد إعادة تعيين جميع الأيام؟",
+                    // Meta tags
+                    metaKeywords: "مهمة 180 يوم, تقييم الموظفين, تطوير الموظفين, أداء الموظفين, تقييم أداء, موارد بشرية, الدوام الفعلي خلال السنة , تطوير مهني, خطة تطوير الموظفين",
+                    metaDescription: "نظام متكامل لحساب الدوام الفعلي خلال السنة للحصول على الامتياز. يتميز بسهولة الاستخدام والفعاليّة في متابعة أداء الموظفين وتحقيق التميز خلال 180 يوم عمل.",
+                    pageTitle: "مهمة 180: رحلتك نحو التميز المهني"
+                },
+                en: {
+                    headerTitle: "180 Day Mission",
+                    headerSubtitle: "Track your progress in your professional journey",
+                    darkModeText: "Dark Mode",
+                    lastUpdateTitle: "Last Update:",
+                    lastUpdateText: "Last modified on:",
+                    progressTitle: "Your Progress",
+                    completedDaysLabel: "Completed Days",
+                    remainingDaysLabel: "Remaining Days",
+                    completionPercentLabel: "Completion Percentage",
+                    completeDayText: "Complete Current Day",
+                    undoDayText: "Undo Last Day",
+                    resetBtn: "Reset All",
+                    footerText: "Track your progress day by day towards achieving your professional goals",
+                    congratsTitle: "Congratulations! You've Completed 180 Working Days",
+                    congratsText: "You have successfully completed your 180-day work journey. This is a remarkable achievement worth appreciating!",
+                    congratsDua: "O Allah, bless me in my work, make this work purely for Your sake, and grant me success and prosperity in everything I undertake",
+                    congratsMessage: "Continue to progress and give, as hard work is the path to success.",
+                    closeModal: "Continue",
+                    quarterTitle: "Well Done! You've Completed a Quarter of the Journey",
+                    quarterText: "You've completed 25% of your journey, which is a great indicator of your consistency and dedication.",
+                    quarterDua: "O Allah, help me remember You, thank You, and worship You properly, and grant me sincerity in speech and action",
+                    quarterMessage: "Keep going like this, as success requires patience and perseverance.",
+                    halfTitle: "Congratulations! You've Reached the Halfway Point",
+                    halfText: "You've reached the midpoint of your journey, you've come a long way and deserve to be proud of yourself.",
+                    halfDua: "O Allah, there is no ease except what You make easy, and You make the difficult easy if You wish",
+                    halfMessage: "Remember that the second half will be easier, as you are now more experienced.",
+                    threeQuartersTitle: "Amazing! You've Completed 75% of Your Journey",
+                    threeQuartersText: "Only a little remains to achieve your goal, you have shown determination and persistence worthy of admiration.",
+                    threeQuartersDua: "O Allah, benefit me from what You have taught me, teach me what benefits me, and increase me in knowledge, success, and sincerity in work",
+                    threeQuartersMessage: "You are just a few steps away from achieving your goal, keep going and don't look back.",
+                    dayText: "Day",
+                    resetConfirm: "Are you sure you want to reset all days?",
+                    // Meta tags
+                    metaKeywords: "180 Day Mission, employee evaluation, employee development, performance tracking, HR management, work attendance, professional development, employee improvement plan",
+                    metaDescription: "A comprehensive system for tracking actual attendance throughout the year to achieve excellence. Features easy use and effectiveness in monitoring employee performance and achieving excellence over 180 working days.",
+                    pageTitle: "180 Mission: Your Journey to Professional Excellence"
+                }
+            };
             
             // تهيئة البيانات من التخزين المحلي أو إنشاء بيانات جديدة
             function initializeData() {
@@ -683,6 +825,7 @@
                 const savedCurrentDay = localStorage.getItem('currentDay');
                 const savedLastMilestone = localStorage.getItem('lastMilestone');
                 const savedLastUpdate = localStorage.getItem('lastUpdate');
+                const savedLanguage = localStorage.getItem('language');
                 
                 if (savedCurrentDay) {
                     currentDay = parseInt(savedCurrentDay);
@@ -690,6 +833,10 @@
                 
                 if (savedLastMilestone) {
                     lastProgressMilestone = parseInt(savedLastMilestone);
+                }
+                
+                if (savedLanguage) {
+                    currentLanguage = savedLanguage;
                 }
                 
                 if (savedData) {
@@ -705,6 +852,7 @@
                     lastUpdateTimeEl.textContent = savedLastUpdate;
                 }
                 
+                updateLanguage();
                 updateUI();
             }
             
@@ -723,15 +871,29 @@
             // تحديث وقت آخر تعديل
             function updateLastUpdateTime() {
                 const now = new Date();
-                const options = { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: true 
-                };
-                const formatter = new Intl.DateTimeFormat('Er', options);
+                let options;
+                
+                if (currentLanguage === 'ar') {
+                    options = { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true 
+                    };
+                } else {
+                    options = { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true 
+                    };
+                }
+                
+                const formatter = new Intl.DateTimeFormat(currentLanguage === 'ar' ? 'ar-ER' : 'en-US', options);
                 const formattedDate = formatter.format(now);
                 
                 lastUpdateTimeEl.textContent = formattedDate;
@@ -743,7 +905,74 @@
                 localStorage.setItem('180DaysData', JSON.stringify(daysData));
                 localStorage.setItem('currentDay', currentDay);
                 localStorage.setItem('lastMilestone', lastProgressMilestone);
+                localStorage.setItem('language', currentLanguage);
                 updateLastUpdateTime();
+            }
+            
+            // تحديث اللغة
+            function updateLanguage() {
+                const lang = translations[currentLanguage];
+                
+                // تحديث النصوص في الواجهة
+                document.getElementById('headerTitle').textContent = lang.headerTitle;
+                document.getElementById('headerSubtitle').textContent = lang.headerSubtitle;
+                document.getElementById('darkModeText').textContent = lang.darkModeText;
+                document.getElementById('lastUpdateTitle').textContent = lang.lastUpdateTitle;
+                document.getElementById('lastUpdateText').innerHTML = `${lang.lastUpdateText}: <span class="update-time" id="lastUpdateTime">${lastUpdateTimeEl.textContent}</span>`;
+                document.getElementById('progressTitle').textContent = lang.progressTitle;
+                document.getElementById('completedDaysLabel').textContent = lang.completedDaysLabel;
+                document.getElementById('remainingDaysLabel').textContent = lang.remainingDaysLabel;
+                document.getElementById('completionPercentLabel').textContent = lang.completionPercentLabel;
+                document.getElementById('completeDayText').textContent = lang.completeDayText;
+                document.getElementById('undoDayText').textContent = lang.undoDayText;
+                document.getElementById('resetBtn').textContent = lang.resetBtn;
+                document.getElementById('footerText').textContent = lang.footerText;
+                document.getElementById('congratsTitle').textContent = lang.congratsTitle;
+                document.getElementById('congratsText').textContent = lang.congratsText;
+                document.getElementById('congratsDua').textContent = lang.congratsDua;
+                document.getElementById('congratsMessage').textContent = lang.congratsMessage;
+                document.getElementById('closeModal').textContent = lang.closeModal;
+                document.getElementById('closeQuarterModal').textContent = lang.closeModal;
+                document.getElementById('closeHalfModal').textContent = lang.closeModal;
+                document.getElementById('closeThreeQuartersModal').textContent = lang.closeModal;
+                document.getElementById('quarterTitle').textContent = lang.quarterTitle;
+                document.getElementById('quarterText').textContent = lang.quarterText;
+                document.getElementById('quarterDua').textContent = lang.quarterDua;
+                document.getElementById('quarterMessage').textContent = lang.quarterMessage;
+                document.getElementById('halfTitle').textContent = lang.halfTitle;
+                document.getElementById('halfText').textContent = lang.halfText;
+                document.getElementById('halfDua').textContent = lang.halfDua;
+                document.getElementById('halfMessage').textContent = lang.halfMessage;
+                document.getElementById('threeQuartersTitle').textContent = lang.threeQuartersTitle;
+                document.getElementById('threeQuartersText').textContent = lang.threeQuartersText;
+                document.getElementById('threeQuartersDua').textContent = lang.threeQuartersDua;
+                document.getElementById('threeQuartersMessage').textContent = lang.threeQuartersMessage;
+                
+                // تحديث الـ meta tags - الإضافة الجديدة
+                document.getElementById('metaKeywords').setAttribute('content', lang.metaKeywords);
+                document.getElementById('metaDescription').setAttribute('content', lang.metaDescription);
+                document.getElementById('pageTitle').textContent = lang.pageTitle;
+                
+                // تحديث أزرار اللغة
+                arBtn.classList.toggle('active', currentLanguage === 'ar');
+                enBtn.classList.toggle('active', currentLanguage === 'en');
+                
+                // تحديث اتجاه الصفحة
+                document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+                document.documentElement.lang = currentLanguage === 'ar' ? 'ar' : 'en';
+                
+                // تحديث وقت آخر تعديل
+                updateLastUpdateTime();
+            }
+            
+            // تغيير اللغة
+            function changeLanguage(lang) {
+                if (currentLanguage !== lang) {
+                    currentLanguage = lang;
+                    saveData();
+                    updateLanguage();
+                    updateUI(); // لتحديث نص "يوم" في التقويم
+                }
             }
             
             // تحديث واجهة المستخدم
@@ -763,7 +992,7 @@
                     // إضافة محتوى اليوم
                     dayElement.innerHTML = `
                         <div class="day-number">${dayData.day}</div>
-                        <div class="day-text">يوم</div>
+                        <div class="day-text">${translations[currentLanguage].dayText}</div>
                         <div class="checkmark">✓</div>
                     `;
                     
@@ -832,7 +1061,7 @@
             
             // إعادة تعيين جميع البيانات
             function resetData() {
-                if (confirm('هل أنت متأكد من أنك تريد إعادة تعيين جميع الأيام؟')) {
+                if (confirm(translations[currentLanguage].resetConfirm)) {
                     currentDay = 1;
                     lastProgressMilestone = 0;
                     createDaysData();
@@ -885,11 +1114,15 @@
             resetBtn.addEventListener('click', resetData);
             completeDayBtn.addEventListener('click', completeCurrentDay);
             undoDayBtn.addEventListener('click', undoLastDay);
+            arBtn.addEventListener('click', () => changeLanguage('ar'));
+            enBtn.addEventListener('click', () => changeLanguage('en'));
             
             // تهيئة التطبيق
             initializeDarkMode();
             initializeData();
         });
     </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
